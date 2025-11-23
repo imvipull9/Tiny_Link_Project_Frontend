@@ -109,66 +109,42 @@ https://github.com/imvipull9/LinkPro-Backend
 
 <br>
 
-## 🏗️ ADVANCED SYSTEM ARCHITECTURE (Mermaid)
+## 🔁 LINKPRO — FULL SEQUENCE DIAGRAM
 
-```
-flowchart LR
-%% ===================== STYLES =====================
-classDef frontend fill:#60a5fa,stroke:#1e3a8a,stroke-width:2px,color:#fff;
-classDef backend fill:#34d399,stroke:#065f46,stroke-width:2px,color:#fff;
-classDef database fill:#fbbf24,stroke:#b45309,stroke-width:2px,color:#000;
-classDef api fill:#f472b6,stroke:#831843,stroke-width:2px,color:#fff;
-classDef external fill:#c4b5fd,stroke:#5b21b6,stroke-width:2px,color:#000;
+```mermaid
+sequenceDiagram
+    autonumber
 
-%% ===================== FRONTEND =====================
-subgraph FE[🌐 Frontend – React + Material UI]
-A1[📦 Components]:::frontend
-A2[📑 Pages]:::frontend
-A3[🔁 Hooks]:::frontend
-A4[🧩 Utils]:::frontend
-A5[🗂 Public / Src]:::frontend
-end
+    participant U as 🧑 User
+    participant FE as 🌐 Frontend<br>(React + MUI)
+    participant API as 🔌 Backend API<br>(Node + Express)
+    participant DB as 🗃 Database<br>(PostgreSQL – Neon)
+    participant SITE as 🌍 Target Website
 
-%% ===================== BACKEND =====================
-subgraph BE[⚙️ Backend – Node.js + Express]
-B1[📡 Routes]:::backend
-B2[🧠 Controllers]:::backend
-B3[🗄 Database Layer (Pool)]:::backend
-B4[🚀 server.js]:::backend
-end
+    %% ============ URL SHORTENING FLOW ============
+    U->>FE: Enters long URL + (optional) custom code
+    FE->>API: POST /api/links { original_url, short_id }
+    API->>API: Validate URL
+    API->>DB: INSERT short_id, original_url
+    DB-->>API: Return saved record
+    API-->>FE: 201 Created (JSON response)
+    FE-->>U: Displays new short link + QR code
 
-%% ===================== API LAYER =====================
-subgraph API[🔌 REST API Endpoints]
-C1[GET /api/links]:::api
-C2[POST /api/links]:::api
-C3[DELETE /api/links/:id]:::api
-C4[GET /:short_id]:::api
-end
+    %% ============ FETCH LINKS ============
+    U->>FE: Opens dashboard
+    FE->>API: GET /api/links
+    API->>DB: SELECT * FROM short_links
+    DB-->>API: Return rows
+    API-->>FE: Return list of links
+    FE-->>U: Render stats + table
 
-%% ===================== DATABASE =====================
-subgraph DB[(🗃 PostgreSQL – Neon Cloud)]
-D1[(Short Links Table)]:::database
-end
-
-%% ===================== DATA FLOWS =====================
-A1 -->|Axios Requests| API
-A2 -->|User Actions| API
-
-API -->|Triggers| B1
-B1 --> B2
-B2 --> B3
-B3 -->|SQL Queries| D1
-
-D1 -->|Results| B2
-B2 -->|JSON Response| API
-API -->|Response| A2
-
-%% Redirect Flow
-A2 -->|Short Link Click| C4
-C4 --> B2
-B2 --> D1
-C4 -->|Redirect| External[(🌍 Target Website)]
-class External external;
+    %% ============ REDIRECT FLOW ============
+    U->>API: Visits /:short_id
+    API->>DB: SELECT original_url WHERE short_id
+    DB-->>API: Return original_url
+    API->>DB: UPDATE clicks = clicks + 1
+    API-->>SITE: Redirect (302)
+    SITE-->>U: Opens target website
 
 ---
 
