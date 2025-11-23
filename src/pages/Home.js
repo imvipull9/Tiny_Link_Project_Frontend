@@ -62,7 +62,7 @@ function Home() {
               letterSpacing: "-1px",
             }}
           >
-            TinyLink Dashboard
+            LinkPro Dashboard
           </Typography>
 
           <Typography variant="subtitle1" color="text.secondary">
