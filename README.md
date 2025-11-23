@@ -142,7 +142,7 @@ REACT_APP_API_URL=http://localhost:5000
 npm start
 
 <br><br>
-📡 API ENDPOINTS USED <br><br>
+📡 API ENDPOINTS USED <br>
 ```text
 ✔ Get all links <br>
 GET /api/links
