@@ -55,19 +55,20 @@ function Home() {
           }}
         >
           <Typography
-            variant="h3"
-            fontWeight={800}
-            sx={{
-              mb: 1,
-              letterSpacing: "-1px",
-            }}
-          >
-            LinkPro Dashboard
-          </Typography>
+  variant="h3"
+  fontWeight={800}
+  sx={{
+    mb: 1.5,
+    letterSpacing: "-0.5px",
+    lineHeight: 1.2,
+  }}
+>
+  LinkPro Dashboard
+</Typography>
+
 
           <Typography variant="subtitle1" color="text.secondary">
-            Shorten URLs, track click analytics, and manage your links — all in
-            one clean dashboard.
+            Smart URL shortener & analytics — powered by LinkPro.
           </Typography>
 
           <Box sx={{ mt: 4 }}>
