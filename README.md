@@ -125,8 +125,7 @@ LinkPro
 
 
 <br>
-#⚙️ **ENVIRONMENT VARIABLES (Frontend)**
-
+# ⚙️ **ENVIRONMENT VARIABLES (Frontend)**
 Create a .env file:
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
 
