@@ -106,9 +106,8 @@ A cloud-ready platform to shorten URLs, generate QR codes, and track live analyt
 
 <br>
 
-# 🏗 **PROJECT ARCHITECTURE**
-
-```text
+🏗 PROJECT ARCHITECTURE
+<!-- Architecture Image First --> <p align="center"> <img src="architecture.png" alt="Project Architecture" width="750"> </p>
 LinkPro
 │
 ├── Frontend (React + MUI)
@@ -125,6 +124,7 @@ LinkPro
 │   └── server.js
 │
 └── PostgreSQL (Neon)
+
 
 <br>
 ⚙️ ENVIRONMENT VARIABLES (Frontend)
