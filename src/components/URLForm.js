@@ -5,8 +5,8 @@ import { Box, TextField, Button, Stack } from "@mui/material";
 const API = process.env.REACT_APP_API_URL;
 
 function URLForm({ refresh }) {
-  const [targetUrl, setTargetUrl] = useState("");
-  const [code, setCode] = useState("");
+  const [originalUrl, setOriginalUrl] = useState(""); // FIXED
+  const [shortId, setShortId] = useState("");         // FIXED
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
@@ -15,12 +15,12 @@ function URLForm({ refresh }) {
 
     try {
       await axios.post(`${API}/api/links`, {
-        targetUrl,
-        code: code || null,
+        original_url: originalUrl,             // FIXED
+        short_id: shortId || null,             // FIXED
       });
 
-      setTargetUrl("");
-      setCode("");
+      setOriginalUrl("");
+      setShortId("");
       refresh();
     } catch (err) {
       alert(err.response?.data?.error || "Something went wrong");
@@ -35,8 +35,8 @@ function URLForm({ refresh }) {
         <TextField
           label="Long URL"
           placeholder="https://example.com/very/long/link"
-          value={targetUrl}
-          onChange={(e) => setTargetUrl(e.target.value)}
+          value={originalUrl}
+          onChange={(e) => setOriginalUrl(e.target.value)}
           fullWidth
           required
         />
@@ -44,8 +44,8 @@ function URLForm({ refresh }) {
         <TextField
           label="Custom code (optional)"
           placeholder="6–8 letters/numbers"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
+          value={shortId}
+          onChange={(e) => setShortId(e.target.value)}
           fullWidth
         />
 
