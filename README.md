@@ -1,84 +1,171 @@
-# 🚀 LinkPro – Smart URL Shortener & Analytics Dashboard
+🚀 LinkPro – Scalable URL Management System with Real-Time Analytics
 
-LinkPro is a full-stack URL Shortening and Analytics platform built using **React**, **Node.js**, and **PostgreSQL (NeonDB)**.  
-It allows users to generate short URLs, track clicks, view analytics, manage links, and generate QR codes — all inside a modern, responsive dashboard UI.
+LinkPro is a modern, full-stack URL management system that allows users to create short links, generate QR codes, and monitor real-time click analytics.
+The platform includes a responsive dashboard, dark/light themes, and seamless API integration with a Node.js backend.
 
-Frontend is deployed on **Vercel**, and backend on **Render**, with cloud PostgreSQL support and production-grade CORS setup.
+👉 Live Demo: https://linkpro-nine.vercel.app
 
----
+👉 Backend API (Render): https://tasklink-project1.onrender.com
 
-## ⭐ Features
+👉 Backend Repository: https://github.com/imvipull9/LinkPro-Backend
 
-### 🔗 URL Shortening
-- Shorten long/dynamic URLs instantly  
-- Create **custom short IDs** (e.g., `/vipul2799`)  
-- Automatic ID generator if none is provided  
+👉 Frontend Repository: https://github.com/imvipull9/LinkPro-Frontend
 
-### 📊 Analytics & Insights
-- Track total clicks  
-- View top-performing links  
-- Get latest created links  
-- Click-per-link analytics  
-- Beautiful charts using **Recharts**  
+✨ Features
+🔗 URL Shortening
 
-### 🧾 Link Management Dashboard
-- Modern UI built with **Material UI (MUI)**  
-- Create URL  
-- Delete URL  
-- Copy short link  
-- View click stats  
-- Open short URL  
+Create short URLs with automatic or custom codes
 
-### 🧾 QR Code Support
-- Instant QR code generation for all links  
-- Downloadable QR code popup  
+Redirect tracking logic handled via backend
 
-### ☁ Deployment & DevOps
-- Frontend deployed to **Vercel**  
-- Backend deployed to **Render**  
-- PostgreSQL hosted on **NeonDB**  
-- Environment variables for security  
-- CORS restricted only to frontend origin  
+📊 Real-Time Analytics
 
----
+Total clicks
 
-## 🏗 Tech Stack
+Latest created link
 
-### **Frontend**
-- React (CRA)
-- Material UI (MUI)
-- Axios
-- Recharts
-- qrcode.react
+Top performing links
 
-### **Backend**
-- Node.js + Express.js
-- PostgreSQL (NeonDB)
-- pg (node-postgres)
-- CORS
-- dotenv
+Real-time refresh
 
-### **Deployment**
-- Vercel (Frontend)
-- Render (Backend)
-- NeonDB (PostgreSQL Cloud)
+📱 Modern Dashboard
 
----
+Sleek UI built using Material UI (MUI)
 
-### 📦 Project Architecture
-- frontend/
-  ├── src/
-  │ ├── pages/
-  │ ├── components/
-  │ ├── App.js
-  │ ├── index.js
-  │ └── utils/
-  └── .env
+Fully responsive
 
-- backend/
-  ├── server.js
-  ├── db.js
-  ├── schema.sql
-  ├── package.json
-  └── .env
+Smooth animations & transitions
 
+🎨 Dark / Light Mode
+
+Saves theme preference
+
+Works across the dashboard
+
+📸 QR Code Generator
+
+Generate QR codes for each short link
+
+Download / share easily
+
+🗑 Link Management
+
+Delete links
+
+Copy to clipboard
+
+View full target URL
+
+🧩 Tech Stack
+Frontend
+
+React.js (Create React App)
+
+React Router
+
+Material UI (MUI)
+
+Axios
+
+Recharts
+
+qrcode.react
+
+Backend
+
+Node.js + Express
+
+PostgreSQL (Neon DB)
+
+Deployed on Render
+
+Deployment
+
+Frontend → Vercel
+
+Backend → Render
+
+Database → Neon PostgreSQL
+
+🏗 Project Architecture
+LinkPro
+│
+├── Frontend (React + MUI)  ← You are here
+│   ├── Components
+│   ├── Pages
+│   ├── Hooks
+│   ├── utils
+│   └── public / src
+│
+├── Backend (Node + Express)
+│   ├── Routes
+│   ├── Controllers
+│   ├── Database
+│   └── server.js
+│
+└── PostgreSQL (Neon)
+
+⚙️ Environment Variables (Frontend)
+
+Create a .env file:
+
+REACT_APP_API_URL=https://tasklink-project1.onrender.com
+
+🧪 Local Setup
+1️⃣ Clone the repo
+git clone https://github.com/imvipull9/LinkPro-Frontend
+cd LinkPro-Frontend
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Create .env
+REACT_APP_API_URL=http://localhost:5000
+
+4️⃣ Run frontend
+npm start
+
+📡 API Endpoints Used by Frontend
+✔ Fetch all links
+
+GET
+
+/api/links
+
+✔ Create a short link
+
+POST
+
+/api/links
+
+
+Body:
+
+{
+  "original_url": "https://example.com",
+  "short_id": "customCode"
+}
+
+✔ Delete a link
+
+DELETE
+
+/api/links/:short_id
+
+✔ Redirect
+
+GET
+
+/:short_id
+
+
+💡 Why I Built This
+
+To demonstrate full-stack capability in creating scalable systems with real-time analytics, cloud deployments, and clean UI/UX — suitable for production-level URL management.
+
+🙌 Author
+
+Vipul Saini
+Full-Stack Developer
+📧 Email: sainivipul1827@gmail.com
+🌐 Portfolio: https://vipulportfolio-website-99.vercel.app/
