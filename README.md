@@ -109,32 +109,66 @@ https://github.com/imvipull9/LinkPro-Backend
 
 <br>
 
-## 🏗 ARCHITECTURE DIAGRAM
+## 🏗️ ADVANCED SYSTEM ARCHITECTURE (Mermaid)
 
-graph TD
-    subgraph Client (Frontend)
-        A[React + MUI Application] --> B(components)
-        A --> C(pages)
-        A --> D(hooks)
-        A --> E(utils)
-        A --> F(public / src)
-    end
+```
+flowchart LR
+%% ===================== STYLES =====================
+classDef frontend fill:#60a5fa,stroke:#1e3a8a,stroke-width:2px,color:#fff;
+classDef backend fill:#34d399,stroke:#065f46,stroke-width:2px,color:#fff;
+classDef database fill:#fbbf24,stroke:#b45309,stroke-width:2px,color:#000;
+classDef api fill:#f472b6,stroke:#831843,stroke-width:2px,color:#fff;
+classDef external fill:#c4b5fd,stroke:#5b21b6,stroke-width:2px,color:#000;
 
-    subgraph Server (Backend)
-        G[Node + Express Application] --> H(routes)
-        G --> I(controllers)
-        G --> J(database)
-        G --> K(server.js)
-    end
+%% ===================== FRONTEND =====================
+subgraph FE[🌐 Frontend – React + Material UI]
+A1[📦 Components]:::frontend
+A2[📑 Pages]:::frontend
+A3[🔁 Hooks]:::frontend
+A4[🧩 Utils]:::frontend
+A5[🗂 Public / Src]:::frontend
+end
 
-    subgraph Database
-        L[PostgreSQL (Neon)]
-    end
+%% ===================== BACKEND =====================
+subgraph BE[⚙️ Backend – Node.js + Express]
+B1[📡 Routes]:::backend
+B2[🧠 Controllers]:::backend
+B3[🗄 Database Layer (Pool)]:::backend
+B4[🚀 server.js]:::backend
+end
 
-    A -- API Requests --> G
-    G -- Database Interactions --> L
+%% ===================== API LAYER =====================
+subgraph API[🔌 REST API Endpoints]
+C1[GET /api/links]:::api
+C2[POST /api/links]:::api
+C3[DELETE /api/links/:id]:::api
+C4[GET /:short_id]:::api
+end
 
+%% ===================== DATABASE =====================
+subgraph DB[(🗃 PostgreSQL – Neon Cloud)]
+D1[(Short Links Table)]:::database
+end
 
+%% ===================== DATA FLOWS =====================
+A1 -->|Axios Requests| API
+A2 -->|User Actions| API
+
+API -->|Triggers| B1
+B1 --> B2
+B2 --> B3
+B3 -->|SQL Queries| D1
+
+D1 -->|Results| B2
+B2 -->|JSON Response| API
+API -->|Response| A2
+
+%% Redirect Flow
+A2 -->|Short Link Click| C4
+C4 --> B2
+B2 --> D1
+C4 -->|Redirect| External[(🌍 Target Website)]
+class External external;
 
 ---
 
