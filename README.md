@@ -125,3 +125,72 @@ LinkPro
 Create a .env file:
 
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
+
+<br><br>
+🧪 LOCAL SETUP — FRONTEND
+1️⃣ Clone the repo
+git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
+cd Tiny_Link_Project_Frontend
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Setup local environment
+REACT_APP_API_URL=http://localhost:5000
+
+4️⃣ Start development server
+npm start
+
+<br><br>
+📡 API ENDPOINTS USED
+✔ Get all links
+GET /api/links
+
+✔ Create a short link
+POST /api/links
+
+
+Body Example
+
+{
+  "original_url": "https://example.com",
+  "short_id": "customCode"
+}
+
+✔ Delete a link
+DELETE /api/links/:short_id
+
+✔ Redirect short link
+GET /:short_id
+
+<br><br>
+💡 WHY I BUILT THIS PROJECT
+
+This project demonstrates practical experience in:
+
+Full-stack development
+
+REST API architecture
+
+Cloud deployment (Vercel + Render)
+
+Scalable backend development
+
+PostgreSQL database design
+
+Real-time analytics
+
+Modern UI/UX engineering
+
+It reflects complete, production-grade ownership of:
+Frontend + Backend + Database + Hosting.
+
+<br><br>
+🙌 AUTHOR
+
+Vipul Saini
+Full-Stack Developer
+
+📧 Email: sainivipul1827@gmail.com
+
+🌐 Portfolio: https://vipulportfolio-website-99.vercel.app
