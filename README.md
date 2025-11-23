@@ -127,12 +127,12 @@ Create a .env file:
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
 
 <br><br>
-🧪 LOCAL SETUP — FRONTEND
-1️⃣ Clone the repo
-git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
+🧪 LOCAL SETUP — FRONTEND <br>
+1️⃣ Clone the repo <br>
+git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend  <br>
 cd Tiny_Link_Project_Frontend
 
-2️⃣ Install dependencies
+2️⃣ Install dependencies 
 npm install
 
 3️⃣ Setup local environment
