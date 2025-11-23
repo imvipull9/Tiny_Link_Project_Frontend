@@ -20,8 +20,13 @@ function Home() {
   const [tab, setTab] = useState(0);
 
   async function loadLinks() {
-    const res = await axios.get(`${API}/api/links`);
-    setLinks(res.data);
+    try {
+      const res = await axios.get(`${API}/api/links`);
+      setLinks(res.data);
+    } catch (err) {
+      console.error("API ERROR:", err);
+      setLinks([]);
+    }
   }
 
   useEffect(() => {
@@ -68,6 +73,7 @@ function Home() {
               <Box sx={{ mb: 3 }}>
                 <URLForm refresh={loadLinks} />
               </Box>
+
               <LinksTable links={links} refresh={loadLinks} />
             </Box>
           )}
@@ -81,16 +87,17 @@ function Home() {
                 View your most clicked links and recent activity at a glance.
               </Typography>
 
-              {/* Reuse StatsBar inside analytics tab as well */}
+              {/* Reuse StatsBar inside analytics tab */}
               <Box sx={{ mb: 3 }}>
                 <StatsBar links={links} />
               </Box>
 
-              {/* Simple “top 5 links” list */}
+              {/* Top 5 links */}
               <Box>
                 <Typography variant="subtitle1" gutterBottom>
                   Top Links by Clicks
                 </Typography>
+
                 {links.length === 0 ? (
                   <Typography variant="body2" color="text.secondary">
                     No data yet. Create a link first.
@@ -112,7 +119,7 @@ function Home() {
                       .slice(0, 5)
                       .map((link) => (
                         <Box
-                          key={link.code}
+                          key={link.short_id}
                           component="li"
                           sx={{
                             p: 1.5,
@@ -125,18 +132,20 @@ function Home() {
                           }}
                         >
                           <Typography variant="body2" fontWeight={600}>
-                            {API}/{link.code}
+                            {API}/{link.short_id}
                           </Typography>
+
                           <Typography
                             variant="caption"
                             color="text.secondary"
                             sx={{ wordBreak: "break-all" }}
                           >
-                            {link.targetUrl}
+                            {link.original_url}
                           </Typography>
+
                           <Typography variant="caption">
                             Clicks: <b>{link.clicks}</b> • Created:{" "}
-                            {new Date(link.createdAt).toLocaleString()}
+                            {new Date(link.created_at).toLocaleString()}
                           </Typography>
                         </Box>
                       ))}
