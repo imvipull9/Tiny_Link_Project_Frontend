@@ -54,11 +54,12 @@ function Home() {
               theme.palette.mode === "light" ? "#ffffff" : "#0f172a",
           }}
         >
-          <Typography
+          
+         <Typography
   variant="h3"
   fontWeight={800}
   sx={{
-    background: "linear-gradient(90deg, #2563eb, #1e40af)",
+    background: "linear-gradient(90deg, #1f1f1f, #6b7280)", 
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     mb: 1.5,
@@ -66,8 +67,6 @@ function Home() {
 >
   LinkPro Dashboard
 </Typography>
-
-
 
           <Typography variant="subtitle1" color="text.secondary">
             Smart URL shortener & analytics — powered by LinkPro.
