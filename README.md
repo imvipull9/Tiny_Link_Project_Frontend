@@ -108,46 +108,6 @@ https://github.com/imvipull9/LinkPro-Backend
 ---
 
 <br>
-
-## 🔁 LINKPRO — FULL SEQUENCE DIAGRAM
-
-```mermaid
-sequenceDiagram
-    autonumber
-
-    participant U as 🧑 User
-    participant FE as 🌐 Frontend<br>(React + MUI)
-    participant API as 🔌 Backend API<br>(Node + Express)
-    participant DB as 🗃 Database<br>(PostgreSQL – Neon)
-    participant SITE as 🌍 Target Website
-
-    %% ============ URL SHORTENING FLOW ============
-    U->>FE: Enters long URL + (optional) custom code
-    FE->>API: POST /api/links { original_url, short_id }
-    API->>API: Validate URL
-    API->>DB: INSERT short_id, original_url
-    DB-->>API: Return saved record
-    API-->>FE: 201 Created (JSON response)
-    FE-->>U: Displays new short link + QR code
-
-    %% ============ FETCH LINKS ============
-    U->>FE: Opens dashboard
-    FE->>API: GET /api/links
-    API->>DB: SELECT * FROM short_links
-    DB-->>API: Return rows
-    API-->>FE: Return list of links
-    FE-->>U: Render stats + table
-
-    %% ============ REDIRECT FLOW ============
-    U->>API: Visits /:short_id
-    API->>DB: SELECT original_url WHERE short_id
-    DB-->>API: Return original_url
-    API->>DB: UPDATE clicks = clicks + 1
-    API-->>SITE: Redirect (302)
-    SITE-->>U: Opens target website
-
----
-
 <br>
 
 # ⚙️ **ENVIRONMENT VARIABLES (Frontend)**
