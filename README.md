@@ -122,10 +122,10 @@ LinkPro
 │
 └── PostgreSQL (Neon)
 
-\`\`\`
+
 
 <br>
-⚙️ ENVIRONMENT VARIABLES (Frontend)
+#⚙️ **ENVIRONMENT VARIABLES (Frontend)**
 
 Create a .env file:
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
@@ -135,4 +135,65 @@ REACT_APP_API_URL=https://tasklink-project1.onrender.com
 1️⃣ Clone the repository
 git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
 cd frontend
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Setup environment
+REACT_APP_API_URL=http://localhost:5000
+
+4️⃣ Run project
+npm start
+
+<br>
+#📡 **API ENDPOINTS USED**
+✔ Get all links
+
+GET /api/links
+✔ Create a short link
+
+POST /api/links
+Body:
+Copy code
+{
+  "original_url": "https://example.com",
+  "short_id": "customCode"
+}
+
+
+✔ Delete a link
+DELETE /api/links/:short_id
+
+✔ Redirect short link
+GET /:short_id
+
+<br><br>
+#💡 **WHY I BUILT THIS PROJECT**
+
+To demonstrate strong capability in:
+
+Full-stack engineering
+
+REST API architecture
+
+Cloud deployment (Render + Vercel)
+
+Modern UI/UX
+
+This project reflects end-to-end control over frontend, backend, database, and cloud infrastructure — showcasing production-ready development skills.
+
+<br><br>
+#🙌 **AUTHOR**
+
+Vipul Saini
+Full-Stack Developer
+
+📧 Email: sainivipul1827@gmail.com
+
+🌐 Portfolio: https://vipulportfolio-website-99.vercel.app
+
+
+
+
+
 
