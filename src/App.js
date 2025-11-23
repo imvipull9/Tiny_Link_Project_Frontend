@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState } from "react";
 import {
   CssBaseline,
@@ -22,6 +21,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 function App() {
   const [mode, setMode] = useState("light");
 
+  // Smooth Dark/Light Mode
   const theme = useMemo(
     () =>
       createTheme({
@@ -31,6 +31,9 @@ function App() {
           secondary: { main: "#0f172a" },
         },
         shape: { borderRadius: 16 },
+        typography: {
+          fontFamily: "Inter, Arial, sans-serif",
+        },
       }),
     [mode]
   );
@@ -43,17 +46,33 @@ function App() {
       <CssBaseline />
 
       <BrowserRouter>
-        <AppBar position="sticky" elevation={1} color="default">
+        {/* Navbar */}
+        <AppBar
+          position="sticky"
+          elevation={1}
+          color="default"
+          sx={{ borderBottom: 1, borderColor: "divider" }}
+        >
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
               TinyLink Dashboard
             </Typography>
 
-            <Button component={Link} to="/" color="inherit">
+            <Button
+              component={Link}
+              to="/"
+              color="inherit"
+              sx={{ fontWeight: 600 }}
+            >
               Home
             </Button>
 
-            <Button component={Link} to="/analytics" color="inherit">
+            <Button
+              component={Link}
+              to="/analytics"
+              color="inherit"
+              sx={{ fontWeight: 600 }}
+            >
               Analytics
             </Button>
 
@@ -63,7 +82,16 @@ function App() {
           </Toolbar>
         </AppBar>
 
-        <Box sx={{ minHeight: "100vh", py: 4, px: 2 }}>
+        {/* Content */}
+        <Box
+          sx={{
+            minHeight: "100vh",
+            py: 4,
+            px: { xs: 2, md: 4 },
+            backgroundColor: mode === "light" ? "#f9fafb" : "#0f172a",
+            transition: "all 0.3s ease",
+          }}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
