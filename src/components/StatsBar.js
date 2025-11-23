@@ -4,14 +4,15 @@ import { Grid, Paper, Typography } from "@mui/material";
 function StatsBar({ links }) {
   const totalLinks = links.length;
   const totalClicks = links.reduce((sum, l) => sum + (l.clicks || 0), 0);
+
   const mostClicked = links.reduce(
     (max, l) => ((l.clicks || 0) > (max?.clicks || 0) ? l : max),
     null
   );
 
-  const latest = [...links].sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  )[0];
+  // FIXED: use created_at instead of createdAt
+  const latest = [...links]
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
 
   const cards = [
     {
@@ -24,23 +25,23 @@ function StatsBar({ links }) {
     },
     {
       label: "Top Link",
-      value: mostClicked?.code || "—",
+      value: mostClicked?.short_id || "—", // FIXED
       helper: mostClicked?.clicks
         ? `${mostClicked.clicks} clicks`
         : "No clicks yet",
     },
     {
       label: "Latest Created",
-      value: latest?.code || "—",
-      helper: latest?.createdAt
-        ? new Date(latest.createdAt).toLocaleString()
+      value: latest?.short_id || "—", // FIXED
+      helper: latest?.created_at
+        ? new Date(latest.created_at).toLocaleString() // FIXED
         : "",
     },
   ];
 
   return (
     <Grid container spacing={2}>
-      {cards.map((card, idx) => (
+      {cards.map((card) => (
         <Grid item xs={12} sm={6} md={3} key={card.label}>
           <Paper
             elevation={2}
@@ -57,11 +58,7 @@ function StatsBar({ links }) {
               },
             }}
           >
-            <Typography
-              variant="subtitle2"
-              color="text.secondary"
-              gutterBottom
-            >
+            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
               {card.label}
             </Typography>
             <Typography variant="h5" fontWeight={700}>
