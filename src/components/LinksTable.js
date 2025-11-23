@@ -22,10 +22,15 @@ function LinksTable({ links, refresh }) {
   const [qrUrl, setQrUrl] = useState("");
   const [qrOpen, setQrOpen] = useState(false);
 
-  async function deleteLink(code) {
+  async function deleteLink(short_id) {
     if (!window.confirm("Delete this link?")) return;
-    await axios.delete(`${API}/api/links/${code}`);
-    refresh();
+
+    try {
+      await axios.delete(`${API}/api/links/${short_id}`);
+      refresh();
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
   }
 
   function copyToClipboard(text) {
@@ -58,23 +63,20 @@ function LinksTable({ links, refresh }) {
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {links.map((link) => {
-              const shortUrl = `${API}/${link.code}`;
+              const shortUrl = `${API}/${link.short_id}`; // FIXED
 
               return (
-                <TableRow key={link.code}>
+                <TableRow key={link.short_id}>
                   <TableCell>
-                    <MuiLink
-                      href={shortUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+                    <MuiLink href={shortUrl} target="_blank" rel="noreferrer">
                       {shortUrl}
                     </MuiLink>
                   </TableCell>
 
-                  <TableCell>{link.targetUrl}</TableCell>
+                  <TableCell>{link.original_url}</TableCell> {/* FIXED */}
 
                   <TableCell>{link.clicks}</TableCell>
 
@@ -89,10 +91,7 @@ function LinksTable({ links, refresh }) {
                     </Tooltip>
 
                     <Tooltip title="QR Code">
-                      <IconButton
-                        size="small"
-                        onClick={() => openQr(shortUrl)}
-                      >
+                      <IconButton size="small" onClick={() => openQr(shortUrl)}>
                         <QrCodeIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
@@ -101,7 +100,7 @@ function LinksTable({ links, refresh }) {
                       <IconButton
                         size="small"
                         color="error"
-                        onClick={() => deleteLink(link.code)}
+                        onClick={() => deleteLink(link.short_id)} // FIXED
                       >
                         <DeleteIcon fontSize="small" />
                       </IconButton>
