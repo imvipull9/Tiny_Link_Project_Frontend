@@ -49,8 +49,7 @@ https://github.com/imvipull9/LinkPro-Backend
 ║ ⚡ MODERN, CLEAN & POWERFUL LINK MANAGEMENT SYSTEM ║
 ╚══════════════════════════════════════════════════════════╝
 
-markdown
-Copy code
+
 
 ### 🔗 **URL Shortening**
 - Auto-generated short IDs  
@@ -112,12 +111,6 @@ Copy code
 
 # 🏗 **PROJECT ARCHITECTURE**
 
-Below diagram is automatically embedded as requested:
-
-<p align="center">
-  <img src=""C:\Users\imvii\OneDrive\Pictures\Screenshots\Screenshot (69).png"" width="650px">
-</p>
-
 LinkPro
 │
 ├── Frontend (React + MUI)
@@ -135,8 +128,6 @@ LinkPro
 │
 └── PostgreSQL (Neon)
 
-yaml
-Copy code
 
 ---
 
@@ -146,7 +137,7 @@ Copy code
 
 Create a `.env` file:
 
-```env
+```
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
 <br>
 🧪 LOCAL SETUP — FRONTEND
@@ -160,13 +151,11 @@ bash
 Copy code
 npm install
 3️⃣ Create .env
-env
-Copy code
+
 REACT_APP_API_URL=http://localhost:5000
 4️⃣ Run the project
-bash
-Copy code
 npm start
+
 <br>
 📡 API ENDPOINTS USED
 ✔ Fetch all links
@@ -175,8 +164,6 @@ GET /api/links
 ✔ Create short link
 POST /api/links
 
-json
-Copy code
 {
   "original_url": "https://example.com",
   "short_id": "customCode"
