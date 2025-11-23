@@ -143,6 +143,7 @@ npm start
 
 <br><br>
 📡 API ENDPOINTS USED <br><br>
+```text
 ✔ Get all links <br>
 GET /api/links
 
@@ -160,6 +161,7 @@ DELETE /api/links/:short_id
 
 ✔ Redirect short link <br>
 GET /:short_id
+```
 
 <br><br>
 💡 WHY I BUILT THIS PROJECT
