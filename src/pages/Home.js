@@ -58,13 +58,15 @@ function Home() {
   variant="h3"
   fontWeight={800}
   sx={{
+    background: "linear-gradient(90deg, #2563eb, #1e40af)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
     mb: 1.5,
-    letterSpacing: "-0.5px",
-    lineHeight: 1.2,
   }}
 >
   LinkPro Dashboard
 </Typography>
+
 
 
           <Typography variant="subtitle1" color="text.secondary">
