@@ -11,9 +11,11 @@ import {
   Tooltip,
   Link as MuiLink,
 } from "@mui/material";
+
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import QrCodeIcon from "@mui/icons-material/QrCode2";
+
 import QRCodeDialog from "./QRCodeDialog";
 
 const API = process.env.REACT_APP_API_URL;
@@ -22,6 +24,7 @@ function LinksTable({ links, refresh }) {
   const [qrUrl, setQrUrl] = useState("");
   const [qrOpen, setQrOpen] = useState(false);
 
+  // Delete a link
   async function deleteLink(short_id) {
     if (!window.confirm("Delete this link?")) return;
 
@@ -29,24 +32,30 @@ function LinksTable({ links, refresh }) {
       await axios.delete(`${API}/api/links/${short_id}`);
       refresh();
     } catch (err) {
-      console.error("Delete error:", err);
+      console.error("❌ Delete error:", err);
+      alert("Failed to delete. Please try again.");
     }
   }
 
+  // Copy URL
   function copyToClipboard(text) {
     navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
   }
 
+  // Open QR popup
   function openQr(url) {
     setQrUrl(url);
     setQrOpen(true);
   }
 
+  // Close QR popup
   function closeQr() {
     setQrOpen(false);
     setQrUrl("");
   }
 
+  // Empty state
   if (!links || links.length === 0) {
     return <p>No links yet. Create one above.</p>;
   }
@@ -66,22 +75,29 @@ function LinksTable({ links, refresh }) {
 
           <TableBody>
             {links.map((link) => {
-              const shortUrl = `${API}/${link.short_id}`; // FIXED
+              const shortUrl = `${API}/${link.short_id}`;
 
               return (
                 <TableRow key={link.short_id}>
+                  {/* Short URL */}
                   <TableCell>
                     <MuiLink href={shortUrl} target="_blank" rel="noreferrer">
                       {shortUrl}
                     </MuiLink>
                   </TableCell>
 
-                  <TableCell>{link.original_url}</TableCell> {/* FIXED */}
+                  {/* Original URL */}
+                  <TableCell style={{ maxWidth: 300, wordBreak: "break-all" }}>
+                    {link.original_url}
+                  </TableCell>
 
+                  {/* Click Count */}
                   <TableCell>{link.clicks}</TableCell>
 
+                  {/* Actions */}
                   <TableCell align="right">
-                    <Tooltip title="Copy">
+                    {/* Copy */}
+                    <Tooltip title="Copy Short Link">
                       <IconButton
                         size="small"
                         onClick={() => copyToClipboard(shortUrl)}
@@ -90,17 +106,19 @@ function LinksTable({ links, refresh }) {
                       </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="QR Code">
+                    {/* QR Code */}
+                    <Tooltip title="Show QR Code">
                       <IconButton size="small" onClick={() => openQr(shortUrl)}>
                         <QrCodeIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Delete">
+                    {/* Delete */}
+                    <Tooltip title="Delete Link">
                       <IconButton
                         size="small"
                         color="error"
-                        onClick={() => deleteLink(link.short_id)} // FIXED
+                        onClick={() => deleteLink(link.short_id)}
                       >
                         <DeleteIcon fontSize="small" />
                       </IconButton>
@@ -113,6 +131,7 @@ function LinksTable({ links, refresh }) {
         </Table>
       </TableContainer>
 
+      {/* QR Popup */}
       <QRCodeDialog open={qrOpen} onClose={closeQr} url={qrUrl} />
     </>
   );
