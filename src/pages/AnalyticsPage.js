@@ -29,18 +29,23 @@ function AnalyticsPage() {
   const [filter, setFilter] = useState("30");
 
   async function load() {
-    const res = await axios.get(`${API}/api/links`);
-    setLinks(res.data);
+    try {
+      const res = await axios.get(`${API}/api/links`);
+      setLinks(res.data);
+    } catch (err) {
+      console.error("Analytics API Error:", err);
+      setLinks([]);
+    }
   }
 
   useEffect(() => {
     load();
   }, []);
 
-  // Fake date-based data (optional — backend doesn’t support date analytics yet)
+  // Prepare chart-safe data using correct backend fields
   const fakeChart = links.map((l) => ({
-    code: l.code,
-    clicks: l.clicks,
+    code: l.short_id,          // FIXED
+    clicks: l.clicks || 0,     // FIXED
   }));
 
   return (
@@ -72,7 +77,7 @@ function AnalyticsPage() {
         </FormControl>
       </Paper>
 
-      {/* Charts */}
+      {/* Bar Chart */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" mb={2}>
           Clicks per Link (Bar Chart)
@@ -91,6 +96,7 @@ function AnalyticsPage() {
         </Box>
       </Paper>
 
+      {/* Line Chart */}
       <Paper sx={{ p: 3 }}>
         <Typography variant="h6" mb={2}>
           Click Trends (Line Chart)
