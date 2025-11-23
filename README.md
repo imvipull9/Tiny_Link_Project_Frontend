@@ -122,7 +122,7 @@ LinkPro
 │
 └── PostgreSQL (Neon)
 
----
+'''
 
 <br>
 ⚙️ ENVIRONMENT VARIABLES (Frontend)
