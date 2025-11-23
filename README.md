@@ -104,7 +104,7 @@ A cloud-ready platform to shorten URLs, generate QR codes, and track live analyt
 
 # 🏗 **PROJECT ARCHITECTURE**
 
-```text
+
 LinkPro
 │
 ├── Frontend (React + MUI)
