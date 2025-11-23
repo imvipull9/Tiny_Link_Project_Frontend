@@ -104,31 +104,32 @@ A cloud-ready platform to shorten URLs, generate QR codes, and track live analyt
 
 <br>
 🧪 LOCAL SETUP — FRONTEND
+<br>
 1️⃣ Clone the Repository
-git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
-cd Tiny_Link_Project_Frontend
+    git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
+    cd Tiny_Link_Project_Frontend
+<br>
 
 2️⃣ Install Dependencies
-npm install
+    npm install
+<br>
 
 3️⃣ Configure Environment Variables
-
-Create a .env file:
-
-REACT_APP_API_URL=http://localhost:5000
+    Create a .env file:
+    REACT_APP_API_URL=http://localhost:5000
+<br>    
 
 4️⃣ Run the Project
-npm start
+    npm start
 
 <br>
 
 📡 API ENDPOINTS USED
 ✔ Get all links
 GET /api/links
-
+<br>
 ✔ Create a short link
 POST /api/links
-
 
 Body Example
 
