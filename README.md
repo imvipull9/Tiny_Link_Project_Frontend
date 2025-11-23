@@ -1,60 +1,69 @@
-🚀 LinkPro – Scalable URL Management System with Real-Time Analytics
+🔗 LinkPro – Scalable URL Management System with Real-Time Analytics
 
-LinkPro is a modern, full-stack URL management system that allows users to create short links, generate QR codes, and monitor real-time click analytics.
-The platform includes a responsive dashboard, dark/light themes, and seamless API integration with a Node.js backend.
+LinkPro is a cloud-ready, full-stack URL management platform built for creating short links, generating QR codes, and monitoring link performance through real-time analytics.
+The system features a modern dashboard, dark/light themes, responsive UI, and seamless API integration with a Node.js backend.
 
-👉 Live Demo: https://linkpro-nine.vercel.app
+<br>
+🚀 Live Demo:
 
-👉 Backend API (Render): https://tasklink-project1.onrender.com
+https://linkpro-nine.vercel.app
 
-👉 Backend Repository: https://github.com/imvipull9/LinkPro-Backend
+🔌 Backend API (Render):
 
-👉 Frontend Repository: https://github.com/imvipull9/LinkPro-Frontend
+https://tasklink-project1.onrender.com
+
+📦 GitHub Repositories:
+
+Frontend: https://github.com/imvipull9/LinkPro-Frontend
+
+Backend: https://github.com/imvipull9/LinkPro-Backend
 
 ✨ Features
 🔗 URL Shortening
 
-Create short URLs with automatic or custom codes
+Create short URLs with auto-generated or custom codes
 
-Redirect tracking logic handled via backend
+Secure redirection handled through backend API
+
+Validates and stores original URLs efficiently
 
 📊 Real-Time Analytics
 
-Total clicks
+Total clicks tracking
 
-Latest created link
+Latest created link insights
 
 Top performing links
 
-Real-time refresh
+Auto-refresh capability for live metrics
 
-📱 Modern Dashboard
+📱 Modern, Responsive Dashboard
 
-Sleek UI built using Material UI (MUI)
+Built with Material UI
 
-Fully responsive
+Clean UX with smooth animations
 
-Smooth animations & transitions
+Fully responsive across devices
 
 🎨 Dark / Light Mode
 
-Saves theme preference
+Theme toggling with persistent preference
 
-Works across the dashboard
+Optimized for UI accessibility
 
 📸 QR Code Generator
 
-Generate QR codes for each short link
+Instantly generate QR codes for any link
 
-Download / share easily
+Easy share and re-scan support
 
-🗑 Link Management
+🗑 Link Management Tools
 
-Delete links
+Copy short link to clipboard
 
-Copy to clipboard
+Delete existing links
 
-View full target URL
+View complete target URL
 
 🧩 Tech Stack
 Frontend
@@ -73,46 +82,48 @@ qrcode.react
 
 Backend
 
-Node.js + Express
+Node.js
+
+Express.js
 
 PostgreSQL (Neon DB)
 
-Deployed on Render
+CORS, URL validation, structured APIs
 
 Deployment
 
-Frontend → Vercel
+Frontend: Vercel
 
-Backend → Render
+Backend: Render
 
-Database → Neon PostgreSQL
+Database: Neon PostgreSQL
 
 🏗 Project Architecture
 LinkPro
 │
-├── Frontend (React + MUI)  ← You are here
-│   ├── Components
-│   ├── Pages
-│   ├── Hooks
+├── Frontend (React + MUI)
+│   ├── components
+│   ├── pages
+│   ├── hooks
 │   ├── utils
 │   └── public / src
 │
 ├── Backend (Node + Express)
-│   ├── Routes
-│   ├── Controllers
-│   ├── Database
+│   ├── routes
+│   ├── controllers
+│   ├── database
 │   └── server.js
 │
 └── PostgreSQL (Neon)
 
 ⚙️ Environment Variables (Frontend)
 
-Create a .env file:
+Create a .env file in the root:
 
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
 
-🧪 Local Setup
-1️⃣ Clone the repo
+🧪 Local Setup (Frontend)
+1️⃣ Clone the repository
 git clone https://github.com/imvipull9/LinkPro-Frontend
 cd LinkPro-Frontend
 
@@ -122,21 +133,15 @@ npm install
 3️⃣ Create .env
 REACT_APP_API_URL=http://localhost:5000
 
-4️⃣ Run frontend
+4️⃣ Run the frontend
 npm start
 
 📡 API Endpoints Used by Frontend
 ✔ Fetch all links
-
-GET
-
-/api/links
+GET /api/links
 
 ✔ Create a short link
-
-POST
-
-/api/links
+POST /api/links
 
 
 Body:
@@ -147,25 +152,19 @@ Body:
 }
 
 ✔ Delete a link
+DELETE /api/links/:short_id
 
-DELETE
-
-/api/links/:short_id
-
-✔ Redirect
-
-GET
-
-/:short_id
-
+✔ Redirect a link
+GET /:short_id
 
 💡 Why I Built This
 
-To demonstrate full-stack capability in creating scalable systems with real-time analytics, cloud deployments, and clean UI/UX — suitable for production-level URL management.
+To demonstrate full-stack development skills by building a scalable, cloud-deployed URL management system with real-time analytics, modern UI/UX, robust API design, and production-ready architecture.
 
 🙌 Author
 
 Vipul Saini
 Full-Stack Developer
 📧 Email: sainivipul1827@gmail.com
+
 🌐 Portfolio: https://vipulportfolio-website-99.vercel.app/
