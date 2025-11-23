@@ -2,17 +2,22 @@ import React from "react";
 import { Grid, Paper, Typography } from "@mui/material";
 
 function StatsBar({ links }) {
-  const totalLinks = links.length;
-  const totalClicks = links.reduce((sum, l) => sum + (l.clicks || 0), 0);
+  // Safe defaults
+  const safeLinks = Array.isArray(links) ? links : [];
 
-  const mostClicked = links.reduce(
+  const totalLinks = safeLinks.length;
+  const totalClicks = safeLinks.reduce((sum, l) => sum + (l.clicks || 0), 0);
+
+  // Most clicked link
+  const mostClicked = safeLinks.reduce(
     (max, l) => ((l.clicks || 0) > (max?.clicks || 0) ? l : max),
     null
   );
 
-  // FIXED: use created_at instead of createdAt
-  const latest = [...links]
-    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+  // Latest created link (using created_at)
+  const latest = [...safeLinks].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  )[0];
 
   const cards = [
     {
@@ -25,16 +30,16 @@ function StatsBar({ links }) {
     },
     {
       label: "Top Link",
-      value: mostClicked?.short_id || "—", // FIXED
+      value: mostClicked?.short_id || "—",
       helper: mostClicked?.clicks
         ? `${mostClicked.clicks} clicks`
         : "No clicks yet",
     },
     {
       label: "Latest Created",
-      value: latest?.short_id || "—", // FIXED
+      value: latest?.short_id || "—",
       helper: latest?.created_at
-        ? new Date(latest.created_at).toLocaleString() // FIXED
+        ? new Date(latest.created_at).toLocaleString()
         : "",
     },
   ];
@@ -51,21 +56,33 @@ function StatsBar({ links }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              transition: "transform 0.2s, box-shadow 0.2s",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+              borderRadius: 2,
               "&:hover": {
                 transform: "translateY(-3px)",
                 boxShadow: 6,
               },
             }}
           >
-            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               {card.label}
             </Typography>
+
             <Typography variant="h5" fontWeight={700}>
               {card.value}
             </Typography>
+
             {card.helper && (
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ mt: 0.5 }}
+              >
                 {card.helper}
               </Typography>
             )}
