@@ -65,5 +65,20 @@ Frontend is deployed on **Vercel**, and backend on **Render**, with cloud Postgr
 
 ---
 
-## 📦 Project Architecture
+### 📦 Project Architecture
+- frontend/
+  ├── src/
+  │ ├── pages/
+  │ ├── components/
+  │ ├── App.js
+  │ ├── index.js
+  │ └── utils/
+  └── .env
+
+- backend/
+  ├── server.js
+  ├── db.js
+  ├── schema.sql
+  ├── package.json
+  └── .env
 
