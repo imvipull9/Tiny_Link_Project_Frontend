@@ -9,6 +9,7 @@ import {
   Tab,
   Grow,
   CircularProgress,
+  Container,
 } from "@mui/material";
 
 import URLForm from "../components/URLForm";
@@ -22,50 +23,56 @@ function Home() {
   const [tab, setTab] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Load all links
   async function loadLinks() {
     try {
       setLoading(true);
       const res = await axios.get(`${API}/api/links`);
       setLinks(res.data || []);
     } catch (err) {
-      console.error("❌ API ERROR:", err);
+      console.error("API ERROR:", err);
       setLinks([]);
     } finally {
       setLoading(false);
     }
   }
 
-  // First load
   useEffect(() => {
     loadLinks();
   }, []);
 
   return (
-    <Box maxWidth="lg" sx={{ mx: "auto" }}>
-      {/* ===================== HEADER ===================== */}
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      {/* ===================== HEADER CARD ===================== */}
       <Grow in timeout={500}>
         <Paper
-          elevation={3}
+          elevation={4}
           sx={{
-            p: 3,
-            mb: 3,
-            borderRadius: 3,
-            overflow: "hidden",
+            p: { xs: 3, md: 4 },
+            mb: 4,
+            borderRadius: 4,
+            background: (theme) =>
+              theme.palette.mode === "light" ? "#ffffff" : "#0f172a",
           }}
         >
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Task_Link 🔗
+          <Typography
+            variant="h3"
+            fontWeight={800}
+            sx={{
+              mb: 1,
+              letterSpacing: "-1px",
+            }}
+          >
+            TinyLink Dashboard
           </Typography>
 
-          <Typography variant="body1" color="text.secondary" gutterBottom>
-            Modern URL shortener with stats, QR codes and a clean dashboard UI.
+          <Typography variant="subtitle1" color="text.secondary">
+            Shorten URLs, track click analytics, and manage your links — all in
+            one clean dashboard.
           </Typography>
 
-          {/* Stats */}
-          <Box sx={{ mt: 3 }}>
+          <Box sx={{ mt: 4 }}>
             {loading ? (
-              <CircularProgress size={26} />
+              <CircularProgress size={30} />
             ) : (
               <StatsBar links={links} />
             )}
@@ -73,33 +80,49 @@ function Home() {
         </Paper>
       </Grow>
 
-      {/* ===================== MAIN CARD ===================== */}
+      {/* ===================== MAIN CARD (FORM + TABS) ===================== */}
       <Grow in timeout={700}>
-        <Paper elevation={2} sx={{ p: 3, borderRadius: 3 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: { xs: 3, md: 4 },
+            borderRadius: 4,
+          }}
+        >
           {/* Tabs */}
           <Tabs
             value={tab}
             onChange={(_, value) => setTab(value)}
-            sx={{ mb: 2 }}
-            variant="fullWidth"
+            centered
+            sx={{
+              mb: 3,
+              ".MuiTab-root": { fontWeight: 600 },
+            }}
           >
             <Tab label="Links" />
             <Tab label="Analytics" />
           </Tabs>
 
-          <Divider sx={{ mb: 3 }} />
+          <Divider sx={{ mb: 4 }} />
 
           {/* ===================== LINKS TAB ===================== */}
           {tab === 0 && (
             <Box>
-              {/* Form */}
-              <Box sx={{ mb: 3 }}>
+              {/* FORM */}
+              <Box
+                sx={{
+                  mb: 4,
+                  p: 2,
+                  borderRadius: 3,
+                  backgroundColor: "background.default",
+                }}
+              >
                 <URLForm refresh={loadLinks} />
               </Box>
 
-              {/* Table */}
+              {/* TABLE */}
               {loading ? (
-                <Box sx={{ textAlign: "center", py: 4 }}>
+                <Box sx={{ textAlign: "center", py: 5 }}>
                   <CircularProgress />
                 </Box>
               ) : (
@@ -111,16 +134,16 @@ function Home() {
           {/* ===================== ANALYTICS TAB ===================== */}
           {tab === 1 && (
             <Box>
-              <Typography variant="h6" gutterBottom>
-                Analytics Overview
+              <Typography variant="h5" fontWeight={700} gutterBottom>
+                Analytics Summary
               </Typography>
 
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                View your most clicked links and recent activity at a glance.
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
+                Quick insights on your top-performing links.
               </Typography>
 
               {/* Stats in analytics tab */}
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: 4 }}>
                 {loading ? (
                   <CircularProgress size={26} />
                 ) : (
@@ -128,17 +151,17 @@ function Home() {
                 )}
               </Box>
 
-              {/* Top Links */}
+              {/* Top 5 Links */}
               <Box>
-                <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                <Typography variant="h6" fontWeight={700} gutterBottom>
                   Top Links by Clicks
                 </Typography>
 
                 {loading ? (
                   <CircularProgress />
                 ) : links.length === 0 ? (
-                  <Typography variant="body2" color="text.secondary">
-                    No data yet. Create a link first.
+                  <Typography color="text.secondary">
+                    No links created yet.
                   </Typography>
                 ) : (
                   <Box
@@ -149,44 +172,42 @@ function Home() {
                       m: 0,
                       display: "flex",
                       flexDirection: "column",
-                      gap: 1.5,
+                      gap: 2,
                     }}
                   >
                     {[...links]
                       .sort((a, b) => (b.clicks || 0) - (a.clicks || 0))
                       .slice(0, 5)
                       .map((link) => (
-                        <Box
+                        <Paper
                           key={link.short_id}
                           component="li"
+                          elevation={1}
                           sx={{
-                            p: 1.5,
-                            borderRadius: 2,
-                            border: "1px solid",
-                            borderColor: "divider",
+                            p: 2,
+                            borderRadius: 3,
                             display: "flex",
                             flexDirection: "column",
-                            gap: 0.5,
+                            gap: 0.6,
                           }}
                         >
-                          <Typography variant="body2" fontWeight={600}>
+                          <Typography variant="body1" fontWeight={600}>
                             {API}/{link.short_id}
                           </Typography>
 
                           <Typography
-                            variant="caption"
+                            variant="body2"
                             color="text.secondary"
                             sx={{ wordBreak: "break-all" }}
                           >
                             {link.original_url}
                           </Typography>
 
-                          <Typography variant="caption">
-                            Clicks:{" "}
-                            <b>{link.clicks}</b> • Created:{" "}
+                          <Typography variant="caption" color="text.secondary">
+                            Clicks: <b>{link.clicks}</b> • Created{" "}
                             {new Date(link.created_at).toLocaleString()}
                           </Typography>
-                        </Box>
+                        </Paper>
                       ))}
                   </Box>
                 )}
@@ -195,7 +216,7 @@ function Home() {
           )}
         </Paper>
       </Grow>
-    </Box>
+    </Container>
   );
 }
 
