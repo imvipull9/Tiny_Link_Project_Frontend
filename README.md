@@ -143,23 +143,22 @@ npm start
 
 <br><br>
 📡 API ENDPOINTS USED <br><br>
-✔ Get all links
+✔ Get all links <br>
 GET /api/links
 
-✔ Create a short link
-POST /api/links
-
-
+✔ Create a short link<br>
+POST /api/links <br>
 Body:
+<br>
 {
   "original_url": "https://example.com",
   "short_id": "customCode"
 }
 
-✔ Delete a link
+✔ Delete a link <br>
 DELETE /api/links/:short_id
 
-✔ Redirect short link
+✔ Redirect short link <br>
 GET /:short_id
 
 <br><br>
