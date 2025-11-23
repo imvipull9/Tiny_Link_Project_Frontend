@@ -42,10 +42,6 @@ A cloud-ready platform to shorten URLs, generate QR codes, and track live analyt
 <br>
 
 # ✨ **FEATURES**
-╔══════════════════════════════════════════════════════════════╗
-║ ⚡ MODERN, CLEAN & POWERFUL LINK MANAGEMENT SYSTEM ║
-╚══════════════════════════════════════════════════════════════╝
-
 ### 🔗 **URL Shortening**
 - Auto-generated or custom short IDs  
 - Secure redirect logic  
@@ -102,77 +98,30 @@ A cloud-ready platform to shorten URLs, generate QR codes, and track live analyt
 
 ---
 
-<br>
-🧪 LOCAL SETUP — FRONTEND
-<br>
-1️⃣ Clone the Repository
-    git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend
-    cd Tiny_Link_Project_Frontend
-<br>
-
-2️⃣ Install Dependencies
-    npm install
-<br>
-
-3️⃣ Configure Environment Variables
-    Create a .env file:
-    REACT_APP_API_URL=http://localhost:5000
-<br>    
-
-4️⃣ Run the Project
-    npm start
-
-<br>
-
-📡 API ENDPOINTS USED
-✔ Get all links
-GET /api/links
-<br>
-✔ Create a short link
-POST /api/links
-
-Body Example
-
-{
-  "original_url": "https://example.com",
-  "short_id": "customCode"
-}
-
-✔ Delete a link
-DELETE /api/links/:short_id
-
-✔ Redirect short link
-GET /:short_id
-
+🏗 PROJECT ARCHITECTURE
+```text
+LinkPro
+│
+├── Frontend (React + MUI)
+│   ├── components
+│   ├── pages
+│   ├── hooks
+│   ├── utils
+│   └── public / src
+│
+├── Backend (Node + Express)
+│   ├── routes
+│   ├── controllers
+│   ├── database
+│   └── server.js
+│
+└── PostgreSQL (Neon)
+```
 <br>
 
-💡 WHY I BUILT THIS PROJECT
-
-This project demonstrates strong capabilities in:
-
-Full-stack engineering
-
-REST API architecture
-
-Cloud deployment (Render + Vercel)
-
-Scalable backend systems
-
-Modern UI/UX with React & MUI
-
-Real-time analytics and data handling
-
-Production-ready project structuring
-
-It reflects complete ownership over frontend, backend, database, and cloud hosting — showcasing professional and job-ready development skills.
-
 <br>
-<br>
-🙌 AUTHOR
+⚙️ ENVIRONMENT VARIABLES (Frontend)
 
-Vipul Saini
-Full-Stack Developer
+Create a .env file:
 
-📧 Email: sainivipul1827@gmail.com
-
-🌐 Portfolio: https://vipulportfolio-website-99.vercel.app
+REACT_APP_API_URL=https://tasklink-project1.onrender.com
