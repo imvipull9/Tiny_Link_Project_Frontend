@@ -1,5 +1,5 @@
 <!-- -------------------------------------------------------------------- -->
-<!-- ❤️ LINKPRO README — Professionally Designed, ATS-Friendly, GitHub Perfect -->
+<!-- LINKPRO README — Professionally Designed, ATS-Friendly, GitHub Perfect -->
 <!-- -------------------------------------------------------------------- -->
 
 <h1 align="center">🚀 <strong>LINKPRO</strong>  
@@ -121,6 +121,8 @@ LinkPro
 │   └── server.js
 │
 └── PostgreSQL (Neon)
+
+---
 
 <br>
 ⚙️ ENVIRONMENT VARIABLES (Frontend)
