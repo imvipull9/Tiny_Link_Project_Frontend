@@ -8,7 +8,9 @@ import {
   Tabs,
   Tab,
   Grow,
+  CircularProgress,
 } from "@mui/material";
+
 import URLForm from "../components/URLForm";
 import LinksTable from "../components/LinksTable";
 import StatsBar from "../components/StatsBar";
@@ -18,49 +20,68 @@ const API = process.env.REACT_APP_API_URL;
 function Home() {
   const [links, setLinks] = useState([]);
   const [tab, setTab] = useState(0);
+  const [loading, setLoading] = useState(true);
 
+  // Load all links
   async function loadLinks() {
     try {
+      setLoading(true);
       const res = await axios.get(`${API}/api/links`);
-      setLinks(res.data);
+      setLinks(res.data || []);
     } catch (err) {
-      console.error("API ERROR:", err);
+      console.error("❌ API ERROR:", err);
       setLinks([]);
+    } finally {
+      setLoading(false);
     }
   }
 
+  // First load
   useEffect(() => {
     loadLinks();
   }, []);
 
   return (
     <Box maxWidth="lg" sx={{ mx: "auto" }}>
-      {/* Header + stats */}
-      <Grow in={true} timeout={500}>
+      {/* ===================== HEADER ===================== */}
+      <Grow in timeout={500}>
         <Paper
           elevation={3}
-          sx={{ p: 3, mb: 3, borderRadius: 3, overflow: "hidden" }}
+          sx={{
+            p: 3,
+            mb: 3,
+            borderRadius: 3,
+            overflow: "hidden",
+          }}
         >
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             Task_Link 🔗
           </Typography>
+
           <Typography variant="body1" color="text.secondary" gutterBottom>
             Modern URL shortener with stats, QR codes and a clean dashboard UI.
           </Typography>
 
+          {/* Stats */}
           <Box sx={{ mt: 3 }}>
-            <StatsBar links={links} />
+            {loading ? (
+              <CircularProgress size={26} />
+            ) : (
+              <StatsBar links={links} />
+            )}
           </Box>
         </Paper>
       </Grow>
 
-      {/* Main card: form + tabs */}
-      <Grow in={true} timeout={700}>
+      {/* ===================== MAIN CARD ===================== */}
+      <Grow in timeout={700}>
         <Paper elevation={2} sx={{ p: 3, borderRadius: 3 }}>
+          {/* Tabs */}
           <Tabs
             value={tab}
             onChange={(_, value) => setTab(value)}
             sx={{ mb: 2 }}
+            variant="fullWidth"
           >
             <Tab label="Links" />
             <Tab label="Analytics" />
@@ -68,37 +89,54 @@ function Home() {
 
           <Divider sx={{ mb: 3 }} />
 
+          {/* ===================== LINKS TAB ===================== */}
           {tab === 0 && (
             <Box>
+              {/* Form */}
               <Box sx={{ mb: 3 }}>
                 <URLForm refresh={loadLinks} />
               </Box>
 
-              <LinksTable links={links} refresh={loadLinks} />
+              {/* Table */}
+              {loading ? (
+                <Box sx={{ textAlign: "center", py: 4 }}>
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <LinksTable links={links} refresh={loadLinks} />
+              )}
             </Box>
           )}
 
+          {/* ===================== ANALYTICS TAB ===================== */}
           {tab === 1 && (
             <Box>
               <Typography variant="h6" gutterBottom>
                 Analytics Overview
               </Typography>
+
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                 View your most clicked links and recent activity at a glance.
               </Typography>
 
-              {/* Reuse StatsBar inside analytics tab */}
+              {/* Stats in analytics tab */}
               <Box sx={{ mb: 3 }}>
-                <StatsBar links={links} />
+                {loading ? (
+                  <CircularProgress size={26} />
+                ) : (
+                  <StatsBar links={links} />
+                )}
               </Box>
 
-              {/* Top 5 links */}
+              {/* Top Links */}
               <Box>
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                   Top Links by Clicks
                 </Typography>
 
-                {links.length === 0 ? (
+                {loading ? (
+                  <CircularProgress />
+                ) : links.length === 0 ? (
                   <Typography variant="body2" color="text.secondary">
                     No data yet. Create a link first.
                   </Typography>
@@ -144,7 +182,8 @@ function Home() {
                           </Typography>
 
                           <Typography variant="caption">
-                            Clicks: <b>{link.clicks}</b> • Created:{" "}
+                            Clicks:{" "}
+                            <b>{link.clicks}</b> • Created:{" "}
                             {new Date(link.created_at).toLocaleString()}
                           </Typography>
                         </Box>
