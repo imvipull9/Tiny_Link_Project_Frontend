@@ -109,24 +109,31 @@ https://github.com/imvipull9/LinkPro-Backend
 
 <br>
 
-# 🏗 **PROJECT ARCHITECTURE**
+## 🏗 ARCHITECTURE DIAGRAM
 
-LinkPro
-│
-├── Frontend (React + MUI)
-│ ├── components
-│ ├── pages
-│ ├── hooks
-│ ├── utils
-│ └── public / src
-│
-├── Backend (Node + Express)
-│ ├── routes
-│ ├── controllers
-│ ├── database
-│ └── server.js
-│
-└── PostgreSQL (Neon)
+graph TD
+    subgraph Client (Frontend)
+        A[React + MUI Application] --> B(components)
+        A --> C(pages)
+        A --> D(hooks)
+        A --> E(utils)
+        A --> F(public / src)
+    end
+
+    subgraph Server (Backend)
+        G[Node + Express Application] --> H(routes)
+        G --> I(controllers)
+        G --> J(database)
+        G --> K(server.js)
+    end
+
+    subgraph Database
+        L[PostgreSQL (Neon)]
+    end
+
+    A -- API Requests --> G
+    G -- Database Interactions --> L
+
 
 
 ---
