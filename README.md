@@ -127,7 +127,7 @@ Create a .env file:
 REACT_APP_API_URL=https://tasklink-project1.onrender.com
 
 <br><br>
-🧪 LOCAL SETUP — FRONTEND <br>
+🧪 LOCAL SETUP — FRONTEND <br><br>
 1️⃣ Clone the repo <br>
 git clone https://github.com/imvipull9/Tiny_Link_Project_Frontend  <br>
 cd Tiny_Link_Project_Frontend
@@ -150,8 +150,7 @@ GET /api/links
 POST /api/links
 
 
-Body Example
-
+Body:
 {
   "original_url": "https://example.com",
   "short_id": "customCode"
@@ -165,6 +164,7 @@ GET /:short_id
 
 <br><br>
 💡 WHY I BUILT THIS PROJECT
+```text
 
 This project demonstrates practical experience in:
 
@@ -184,6 +184,8 @@ Modern UI/UX engineering
 
 It reflects complete, production-grade ownership of:
 Frontend + Backend + Database + Hosting.
+
+```
 
 <br><br>
 🙌 AUTHOR
